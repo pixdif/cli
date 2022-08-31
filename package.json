@@ -1,0 +1,48 @@
+{
+  "name": "@pixdif/cli",
+  "version": "0.1.0",
+  "description": "Command-Line Interface of PixDif",
+  "main": "dist",
+  "scripts": {
+    "build": "tsc",
+    "debug": "tsc --incremental --sourceMap",
+    "test": "npm run lint && npm run jest",
+    "lint": "eslint --ext=ts,js .",
+    "jest": "jest --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pixdif/cli.git"
+  },
+  "keywords": [
+    "compare",
+    "image",
+    "pdf"
+  ],
+  "author": "Kazuichi Takashiro",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pixdif/cli/issues"
+  },
+  "homepage": "https://github.com/pixdif/cli#readme",
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@pixdif/model": "^0.2.0",
+    "yargs": "^17.5.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.0.0",
+    "@types/node": "^16.11.56",
+    "@types/yargs": "^17.0.12",
+    "@typescript-eslint/eslint-plugin": "^5.36.1",
+    "@typescript-eslint/parser": "^5.36.1",
+    "eslint": "^8.23.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "jest": "^28.1.3",
+    "ts-jest": "^28.0.8",
+    "typescript": "^4.8.2"
+  }
+}

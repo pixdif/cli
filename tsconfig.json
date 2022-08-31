@@ -1,0 +1,13 @@
+{
+	"compilerOptions": {
+		"outDir": "dist",
+		"module": "Node16",
+		"moduleResolution": "Node",
+		"esModuleInterop": true,
+		"declaration": true,
+		"strict": true
+	},
+	"include": [
+		"src"
+	]
+}
