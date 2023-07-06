@@ -29,12 +29,12 @@
     "dist"
   ],
   "dependencies": {
-    "@pixdif/core": "^0.2.0",
-    "@pixdif/model": "^0.6.0",
+    "@pixdif/core": "^0.7.0",
+    "@pixdif/model": "^0.7.0",
     "yargs": "^17.7.2"
   },
   "devDependencies": {
-    "@types/jest": "^29.5.1",
+    "@pixdif/png-parser": "^0.7.0",
     "@types/node": "^18.16.3",
     "@types/yargs": "^17.0.24",
     "@typescript-eslint/eslint-plugin": "^5.59.2",
