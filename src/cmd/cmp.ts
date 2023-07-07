@@ -1,7 +1,7 @@
 import { Argv } from 'yargs';
 
 import { Comparator } from '@pixdif/core';
-import ComparatorLogger from './log/ComparatorLogger';
+import ComparatorLogger from '../log/ComparatorLogger';
 
 export const command = 'cmp <expected> <actual>';
 export const describe = 'Compare 2 files.';
@@ -13,7 +13,7 @@ export function builder(yargs: Argv): Argv {
 			default: 'cache',
 			describe: 'The directory to save cache files (PNG files) of each expected file. It will be faster compare them with other actual files.',
 		},
-		diffThreshold: {
+		tolerance: {
 			type: 'number',
 			default: 0.001,
 			describe: 'The threshold to judge wether a pixel is different from another.',
@@ -27,7 +27,7 @@ export function builder(yargs: Argv): Argv {
 
 interface Arguments {
 	cacheDir: string;
-	diffThreshold: number;
+	tolerance: number;
 	outputDir?: string;
 	expected: string;
 	actual: string;
@@ -36,7 +36,7 @@ interface Arguments {
 export async function handler(args: Arguments): Promise<void> {
 	const {
 		cacheDir,
-		diffThreshold,
+		tolerance,
 		outputDir,
 		expected,
 		actual,
@@ -51,6 +51,6 @@ export async function handler(args: Arguments): Promise<void> {
 
 	console.log('Comparing...');
 	const diffs = await cmp.exec();
-	const matched = diffs.every(({ ratio }) => ratio <= diffThreshold);
+	const matched = diffs.every(({ ratio }) => ratio <= tolerance);
 	console.log(`Matched: ${matched ? 'Yes' : 'No'}`);
 }

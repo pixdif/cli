@@ -1,11 +1,11 @@
 import { Progress } from '@pixdif/model';
 import { Comparator, Action } from '@pixdif/core/Comparator';
 
-import capitalize from '../../util/capitalize';
+import capitalize from '../util/capitalize';
 
 function reportProgress(action: string, progress: Progress): void {
 	if (progress.current === 0) {
-		console.log(`${capitalize(action)} ${progress.limit} pages...`);
+		console.log(`${capitalize(action)} ${progress.limit} images...`);
 	} else if (progress.error) {
 		console.error(`Failed to ${action} Page ${progress.current} due to ${progress.error}`);
 	} else {
@@ -18,18 +18,18 @@ function reportPreparingProgress(progress: Progress): void {
 }
 
 function reportCopyingProgress(progress: Progress): void {
-	reportProgress(Action.Preparing, progress);
+	reportProgress(Action.Copying, progress);
 }
 
 function reportConvertingProgress(progress: Progress): void {
-	reportProgress(Action.Preparing, progress);
+	reportProgress(Action.Converting, progress);
 }
 
 function reportComparingProgress(progress: Progress): void {
-	reportProgress(Action.Preparing, progress);
+	reportProgress(Action.Comparing, progress);
 }
 
-export default class ComparatorLogger {
+export class ComparatorLogger {
 	protected readonly cmp: Comparator;
 
 	constructor(cmp: Comparator) {
@@ -43,3 +43,5 @@ export default class ComparatorLogger {
 		this.cmp.on(Action.Comparing, reportComparingProgress);
 	}
 }
+
+export default ComparatorLogger;

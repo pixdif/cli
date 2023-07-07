@@ -30,7 +30,9 @@
   ],
   "dependencies": {
     "@pixdif/core": "^0.7.0",
+    "@pixdif/html-reporter": "^0.3.2",
     "@pixdif/model": "^0.7.0",
+    "glob": "^10.3.1",
     "yargs": "^17.7.2"
   },
   "devDependencies": {
