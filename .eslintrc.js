@@ -33,6 +33,13 @@ module.exports = {
 		],
 		'linebreak-style': 'off',
 		'no-await-in-loop': 'off',
+		'import/no-extraneous-dependencies': [
+			'error', {
+				devDependencies: false,
+				optionalDependencies: false,
+				peerDependencies: true,
+			},
+		],
 		'no-plusplus': 'off',
 		'no-redeclare': 'off',
 		'no-restricted-syntax': [

@@ -28,6 +28,7 @@ export function builder(yargs: Argv): Argv {
 		reportFormat: {
 			type: 'string',
 			describe: 'Report format. It is an HTML report by default.',
+			default: '@pixdif/html-reporter',
 		},
 	});
 }
@@ -39,7 +40,7 @@ interface Arguments {
 	cacheDir?: string;
 	tolerance?: number;
 	reportDir?: string;
-	reportFormat?: string;
+	reportFormat: string;
 }
 
 export async function handler(args: Arguments): Promise<void> {
@@ -50,7 +51,7 @@ export async function handler(args: Arguments): Promise<void> {
 		actualDir,
 		pattern,
 		reportDir = actualDir,
-		reportFormat = '@pixdif/html-reporter',
+		reportFormat,
 	} = args;
 
 	console.log(`Expected: ${expectedDir}`);
