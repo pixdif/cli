@@ -3,6 +3,9 @@
   "version": "0.8.0",
   "description": "Command-Line Interface of PixDif",
   "main": "pixdif.js",
+  "bin": {
+    "pixdif": "pixdif.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pixdif/cli.git"
