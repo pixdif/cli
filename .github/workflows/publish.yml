@@ -22,6 +22,12 @@ jobs:
       -
         run: |
           cp src/package.json dist/
-          (cd dist && npm publish --access=public)
+          cp LICENSE dist/
+          cd dist
+          npm pkg set main=pixdif.js
+          npm pkg delete scripts
+          npm pkg delete files
+          npm pkg delete devDependencies
+          npm publish --access=public
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
