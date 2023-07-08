@@ -5,7 +5,7 @@ import { handler as convert } from '../src/cmd/convert';
 const log = jest.spyOn(console, 'log').mockReturnValue();
 
 it('reads an image', async () => {
-	const input = 'test/sample/shapes-a.png';
+	const input = 'test/sample/expected/shapes-a.png';
 	await convert({
 		input,
 		outputDir: 'output/convert',

@@ -1,9 +1,11 @@
 import { Argv } from 'yargs';
 import express from 'express';
 
+import apiMap from '../api';
+
 interface Arguments {
-	baselineDir: string;
-	host: string;
+	dataDir: string;
+	reportDir: string;
 	port: number;
 }
 
@@ -17,10 +19,10 @@ export function builder(argv: Argv): Argv {
 			describe: 'Data directory to save baselines and other data.',
 			default: 'data',
 		},
-		host: {
+		reportDir: {
 			type: 'string',
-			describe: 'Hostname of the server.',
-			default: 'localhost',
+			describe: 'The directory of all test reports.',
+			default: 'output',
 		},
 		port: {
 			type: 'number',
@@ -30,14 +32,18 @@ export function builder(argv: Argv): Argv {
 	});
 }
 
-export async function handler(args: Arguments): Promise<void> {
+export async function handler({
+	dataDir,
+	reportDir,
+	port,
+}: Arguments): Promise<void> {
 	const server = express();
-	server.use(express.static('.'));
-	server.listen(args.port, args.host);
-
-	if (!args.host) {
-		console.log(`Listening at ${args.port}`);
-	} else {
-		console.log(`Listening at ${args.host}:${args.port}`);
+	server.use(`/${dataDir}`, express.static(dataDir));
+	server.use(`/${reportDir}`, express.static(reportDir));
+	for (const [contextPath, api] of apiMap) {
+		server.use(`/api/${contextPath}`, api);
 	}
+	server.listen(port);
+
+	console.log(`Listening at ${port}`);
 }

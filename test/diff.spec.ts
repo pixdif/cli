@@ -8,31 +8,40 @@ const time = jest.spyOn(console, 'time').mockReturnValue();
 const timeEnd = jest.spyOn(console, 'timeEnd').mockReturnValue();
 
 it('compares two directories', async () => {
-	const a = path.join('test', 'sample', 'shapes-a.png');
-	const b = path.join('test', 'sample', 'shapes-b.png');
+	const expectedDir = 'test/sample/expected';
+	const actualDir = 'test/sample/actual';
+	const a = 'shapes-a.png';
+	const b = 'shapes-b.png';
+	const c = 'shapes-c.png';
 	await diff({
-		expectedDir: 'test/sample',
-		actualDir: 'test/sample',
+		expectedDir,
+		actualDir,
 		pattern: '*.png',
 		reportDir: 'output/diff',
+		reportFormat: '@pixdif/html-reporter',
 	});
 	const logLines = [
-		'Expected: test/sample',
-		'Actual: test/sample',
+		`Expected: ${expectedDir}`,
+		`Actual: ${actualDir}`,
 		'Found 2 baselines.',
 		'Found 2 actual outputs.',
 		'',
-		'Comparing 2 files...',
+		'Comparing 3 files...',
 		'',
-		'(1 / 2) shapes-b.png',
-		`Expected: ${b}`,
-		`Actual: ${b}`,
+		`(1 / 3) ${b}`,
+		`Expected: ${path.join(expectedDir, b)}`,
+		`Actual: ${path.join(actualDir, b)}`,
 		'Matched: Yes',
 		'',
-		'(2 / 2) shapes-a.png',
-		`Expected: ${a}`,
-		`Actual: ${a}`,
-		'Matched: Yes',
+		'(2 / 3) shapes-a.png',
+		`Expected: ${path.join(expectedDir, a)}`,
+		`Actual: ${path.join(actualDir, a)}`,
+		`No output at ${path.join(actualDir, a)}`,
+		'',
+		'(3 / 3) shapes-c.png',
+		`Expected: ${path.join(expectedDir, c)}`,
+		`Actual: ${path.join(actualDir, c)}`,
+		`No baseline at ${path.join(expectedDir, c)}`,
 		'',
 		'Report: output/diff',
 	];

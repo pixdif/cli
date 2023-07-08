@@ -5,8 +5,8 @@ import { handler as compare } from '../src/cmd/cmp';
 const log = jest.spyOn(console, 'log').mockReturnValue();
 
 it('compares two images', async () => {
-	const expected = 'test/sample/shapes-a.png';
-	const actual = 'test/sample/shapes-b.png';
+	const expected = 'test/sample/expected/shapes-b.png';
+	const actual = 'test/sample/actual/shapes-b.png';
 	await compare({
 		expected,
 		actual,
