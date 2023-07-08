@@ -2,6 +2,13 @@ import { Argv } from 'yargs';
 
 import { ServerOptions, serve } from '../api';
 
+interface Arguments extends ServerOptions {
+	/**
+	 * Port number of the server.
+	 */
+	port: number;
+}
+
 export const command = 'serve';
 export const describe = 'Start a server to show reports and manage baselines.';
 
@@ -25,7 +32,8 @@ export function builder(argv: Argv): Argv {
 	});
 }
 
-export function handler(options: ServerOptions): void {
-	serve(options);
+export function handler(options: Arguments): void {
+	const app = serve(options);
+	app.listen(options.port);
 	console.log(`Listening at ${options.port}`);
 }

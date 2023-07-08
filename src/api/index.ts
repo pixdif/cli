@@ -16,20 +16,14 @@ export interface ServerOptions {
 	 * The directory of all test reports.
 	 */
 	outputDir: string;
-
-	/**
-	 * Port number of the server.
-	 */
-	port: number;
 }
 
-export function serve({ dataDir, outputDir, port }: ServerOptions): Express {
+export function serve({ dataDir, outputDir }: ServerOptions): Express {
 	const server = express();
 	server.use(`/${dataDir}`, express.static(dataDir));
 	server.use(`/${outputDir}`, express.static(outputDir));
 	for (const [contextPath, api] of apiMap) {
 		server.use(`/api/${contextPath}`, api);
 	}
-	server.listen(port);
 	return server;
 }

@@ -9,7 +9,7 @@ router.use(json());
 
 router.post('/', async (req, res) => {
 	if (req.headers['content-type'] !== 'application/json') {
-		res.end(415);
+		res.status(415).end();
 		return;
 	}
 
@@ -21,6 +21,7 @@ router.post('/', async (req, res) => {
 
 	if (!req.body.expected || !req.body.actual) {
 		res.status(400).send('Please define both expected and actual files.');
+		return;
 	}
 
 	const reportUrl = new URL(reportFile);
