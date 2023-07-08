@@ -1,5 +1,5 @@
 {
-  "name": "@pixdif/cli",
+  "name": "@pixdif-repo/cli",
   "version": "0.1.0",
   "description": "Command-Line Interface of PixDif",
   "main": "dist",
@@ -29,14 +29,7 @@
     "dist"
   ],
   "dependencies": {
-    "@pixdif/core": "^0.8.0",
-    "@pixdif/html-reporter": "^0.8.0",
-    "@pixdif/model": "^0.8.0",
-    "glob": "^10.3.1",
-    "yargs": "^17.7.2"
-  },
-  "peerDependencies": {
-    "express": "^4.18.2"
+    "@pixdif/cli": "file:src"
   },
   "devDependencies": {
     "@pixdif/png-parser": "^0.8.0",
