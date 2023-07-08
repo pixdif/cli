@@ -21,7 +21,7 @@ jobs:
       - run: npm run build
       -
         run: |
-          cp src/package.json dist/
+          cp package.json dist/
           cp LICENSE dist/
           cd dist
           npm pkg set main=pixdif.js
