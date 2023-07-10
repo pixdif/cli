@@ -26,13 +26,6 @@ module.exports = {
 				jsx: 'never',
 			},
 		],
-		'import/no-unresolved': 'off',
-		indent: [
-			'error',
-			'tab',
-		],
-		'linebreak-style': 'off',
-		'no-await-in-loop': 'off',
 		'import/no-extraneous-dependencies': [
 			'error', {
 				devDependencies: false,
@@ -40,6 +33,14 @@ module.exports = {
 				peerDependencies: true,
 			},
 		],
+		'import/no-unresolved': 'off',
+		indent: [
+			'error',
+			'tab',
+		],
+		'linebreak-style': 'off',
+		'no-await-in-loop': 'off',
+		'no-continue': 'off',
 		'no-plusplus': 'off',
 		'no-redeclare': 'off',
 		'no-restricted-syntax': [

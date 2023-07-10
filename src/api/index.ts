@@ -2,9 +2,11 @@ import type { Router, Express } from 'express';
 import express from 'express';
 
 import snapshots from './snapshots';
+import reports from './reports';
 
 const apiMap = new Map<string, Router>();
 apiMap.set('snapshots', snapshots);
+apiMap.set('reports', reports);
 
 export interface ServerOptions {
 	/**
@@ -25,5 +27,7 @@ export function serve({ dataDir, outputDir }: ServerOptions): Express {
 	for (const [contextPath, api] of apiMap) {
 		server.use(`/api/${contextPath}`, api);
 	}
+	server.set('dataDir', dataDir);
+	server.set('outputDir', outputDir);
 	return server;
 }
