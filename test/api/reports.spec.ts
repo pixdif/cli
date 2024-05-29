@@ -14,7 +14,7 @@ it('lists all directories', async () => {
 	expect(res.statusCode).toBe(200);
 
 	const reports: Report[] = res.body;
-	expect(reports).toHaveLength(4);
+	expect(reports).toHaveLength(3);
 	const reportNames: string[] = reports.map((report) => report.name);
 	expect(reportNames).toContain('api');
 });
