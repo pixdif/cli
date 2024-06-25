@@ -1,2 +1,2 @@
-export * from './BatchComparatorLogger';
-export * from './ComparatorLogger';
+export * from './BatchComparatorLogger.js';
+export * from './ComparatorLogger.js';

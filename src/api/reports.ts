@@ -2,7 +2,7 @@ import fsp from 'fs/promises';
 import path from 'path';
 import { Router } from 'express';
 
-import Report from '../model/Report';
+import Report from '../model/Report.js';
 
 const router = Router();
 

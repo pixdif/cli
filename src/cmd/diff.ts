@@ -4,7 +4,7 @@ import { Argv } from 'yargs';
 import { glob } from 'glob';
 import { BatchComparator, BatchTask } from '@pixdif/core';
 
-import BatchComparatorLogger from '../log/BatchComparatorLogger';
+import BatchComparatorLogger from '../log/BatchComparatorLogger.js';
 
 export const command = 'diff <expectedDir> <actualDir> <pattern>';
 export const describe = 'Compare files in two directories.';

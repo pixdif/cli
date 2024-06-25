@@ -1,6 +1,7 @@
 import { Argv } from 'yargs';
+import type { Server } from 'http';
 
-import { ServerOptions, serve } from '../api';
+import { ServerOptions, serve } from '../api/index.js';
 
 interface Arguments extends ServerOptions {
 	/**
@@ -32,8 +33,9 @@ export function builder(argv: Argv): Argv {
 	});
 }
 
-export function handler(options: Arguments): void {
+export function handler(options: Arguments): Server {
 	const app = serve(options);
-	app.listen(options.port);
+	const server = app.listen(options.port);
 	console.log(`Listening at ${options.port}`);
+	return server;
 }

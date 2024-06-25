@@ -1,8 +1,8 @@
 import type { Router, Express } from 'express';
 import express from 'express';
 
-import snapshots from './snapshots';
-import reports from './reports';
+import snapshots from './snapshots.js';
+import reports from './reports.js';
 
 const apiMap = new Map<string, Router>();
 apiMap.set('snapshots', snapshots);

@@ -1,6 +1,6 @@
 import { jest, it, expect } from '@jest/globals';
 
-import { handler as compare } from '../src/cmd/cmp';
+import { handler as compare } from '../src/cmd/cmp.js';
 
 const log = jest.spyOn(console, 'log').mockReturnValue();
 

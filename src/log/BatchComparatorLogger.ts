@@ -1,7 +1,7 @@
 import { TestStatus } from '@pixdif/model';
 import { BatchComparator } from '@pixdif/core';
 
-import ComparatorLogger from './ComparatorLogger';
+import ComparatorLogger from './ComparatorLogger.js';
 
 export class BatchComparatorLogger {
 	protected readonly bat: BatchComparator;

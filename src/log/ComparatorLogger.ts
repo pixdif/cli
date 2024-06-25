@@ -1,7 +1,7 @@
 import { Progress } from '@pixdif/model';
-import { Comparator, Action } from '@pixdif/core/Comparator';
+import { Comparator, Action } from '@pixdif/core/Comparator.js';
 
-import capitalize from '../util/capitalize';
+import capitalize from '../util/capitalize.js';
 
 function reportProgress(action: string, progress: Progress): void {
 	if (progress.current === 0) {

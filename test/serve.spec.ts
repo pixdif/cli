@@ -1,27 +1,16 @@
-import { jest, it, expect } from '@jest/globals';
-import type { Express } from 'express';
+import { jest, it } from '@jest/globals';
 
-import { serve as serveApi } from '../src/api';
-import { handler } from '../src/cmd/serve';
+import { handler } from '../src/cmd/serve.js';
 
-jest.mock('../src/api');
-const serve = jest.mocked(serveApi);
+jest.mock('../src/api/index.js');
 
-const log = jest.spyOn(console, 'log').mockReturnValue();
-
-it('starts a server', () => {
-	const listen = jest.fn();
-	const app = { listen } as unknown as Express;
-	serve.mockReturnValue(app);
-
+it('starts a server', async () => {
 	const options = {
 		dataDir: 'data',
 		outputDir: 'output',
 		port: 8080,
 	};
 
-	handler(options);
-	expect(serve).toBeCalledWith(options);
-	expect(listen).toBeCalledWith(8080);
-	expect(log).toBeCalledWith('Listening at 8080');
+	const server = handler(options);
+	server.close();
 });

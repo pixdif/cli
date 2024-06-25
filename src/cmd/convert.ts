@@ -3,8 +3,8 @@ import fsp from 'fs/promises';
 import path from 'path';
 
 import { Argv } from 'yargs';
-import parse from '@pixdif/core/util/parse';
-import waitFor from '@pixdif/core/util/waitFor';
+import parse from '@pixdif/core/util/parse.js';
+import waitFor from '@pixdif/core/util/waitFor.js';
 
 export const command = 'convert <input>';
 export const describe = 'Convert a file into multiple PNG images.';
@@ -32,7 +32,7 @@ export async function handler(args: Arguments): Promise<void> {
 	await fsp.mkdir(outputDir, { recursive: true });
 
 	console.log(`Converting ${input} ...`);
-	const parser = parse(input);
+	const parser = await parse(input);
 	await parser.open();
 	const pageNum = await parser.getPageNum();
 	for (let i = 0; i < pageNum; i++) {

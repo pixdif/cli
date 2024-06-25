@@ -1,7 +1,7 @@
 import { jest, it, expect } from '@jest/globals';
 import path from 'path';
 
-import { handler as diff } from '../src/cmd/diff';
+import { handler as diff } from '../src/cmd/diff.js';
 
 const log = jest.spyOn(console, 'log').mockReturnValue();
 const time = jest.spyOn(console, 'time').mockReturnValue();

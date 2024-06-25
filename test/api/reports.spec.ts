@@ -1,8 +1,8 @@
 import { it, expect } from '@jest/globals';
 import request from 'supertest';
 
-import { serve } from '../../src/api';
-import Report from '../../src/model/Report';
+import { serve } from '../../src/api/index.js';
+import Report from '../../src/model/Report.js';
 
 const dataDir = 'output';
 const outputDir = 'test';

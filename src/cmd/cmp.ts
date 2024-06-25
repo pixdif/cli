@@ -1,7 +1,7 @@
 import { Argv } from 'yargs';
 
 import { Comparator } from '@pixdif/core';
-import ComparatorLogger from '../log/ComparatorLogger';
+import ComparatorLogger from '../log/ComparatorLogger.js';
 
 export const command = 'cmp <expected> <actual>';
 export const describe = 'Compare 2 files.';

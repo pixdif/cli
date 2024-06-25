@@ -2,9 +2,10 @@ import { it, expect } from '@jest/globals';
 import fs from 'fs';
 import fsp from 'fs/promises';
 import path from 'path';
+import url from 'url';
 import request from 'supertest';
 
-import { serve } from '../../src/api';
+import { serve } from '../../src/api/index.js';
 
 const dataDir = 'output';
 const outputDir = 'test';
@@ -12,6 +13,7 @@ const app = serve({ dataDir, outputDir });
 const self = request(app);
 
 const reportFile = 'http://localhost:8080/test/api/index.html?id=2';
+const scriptPath = url.fileURLToPath(import.meta.url);
 
 it('rejects invalid format', async () => {
 	const res = await self.post('/api/snapshots');
@@ -45,7 +47,7 @@ it('rejects non-existing actual file', async () => {
 });
 
 it('successfully overrides a snapshot', async () => {
-	const script = path.basename(__filename);
+	const script = path.basename(scriptPath);
 
 	const expected = path.join(dataDir, script);
 	if (fs.existsSync(expected)) {
