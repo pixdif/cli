@@ -19,6 +19,8 @@ it('compares two directories', async () => {
 		pattern: '*.png',
 		reportDir: 'output/diff',
 		reportFormat: '@pixdif/html-reporter',
+		_: [],
+		$0: '',
 	});
 	const logLines = [
 		`Expected: ${expectedDir}`,

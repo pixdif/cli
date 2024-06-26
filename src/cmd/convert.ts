@@ -2,28 +2,28 @@ import fs from 'fs';
 import fsp from 'fs/promises';
 import path from 'path';
 
-import { Argv } from 'yargs';
+import type { ArgumentsCamelCase, Argv, Options } from 'yargs';
 import parse from '@pixdif/core/util/parse.js';
 import waitFor from '@pixdif/core/util/waitFor.js';
 
 export const command = 'convert <input>';
 export const describe = 'Convert a file into multiple PNG images.';
 
-export function builder(argv: Argv): Argv {
+interface ConvertOptions extends Options {
+	input: string;
+	outputDir?: string;
+}
+
+export function builder(argv: Argv): Argv<ConvertOptions> {
 	return argv.options({
 		outputDir: {
 			type: 'string',
 			describe: 'The location to save PNG files.',
 		},
-	});
+	}) as Argv<ConvertOptions>;
 }
 
-interface Arguments {
-	input: string;
-	outputDir?: string;
-}
-
-export async function handler(args: Arguments): Promise<void> {
+export async function handler(args: ArgumentsCamelCase<ConvertOptions>): Promise<void> {
 	const {
 		input,
 		outputDir = '.',

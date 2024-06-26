@@ -9,6 +9,8 @@ it('reads an image', async () => {
 	await convert({
 		input,
 		outputDir: 'output/convert',
+		_: [],
+		$0: '',
 	});
 	expect(log).nthCalledWith(1, `Converting ${input} ...`);
 	expect(log).nthCalledWith(2, 'Writing Page 1 ...');

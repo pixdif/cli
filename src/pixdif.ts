@@ -2,10 +2,13 @@
 import yargs from 'yargs';
 import assert from 'assert';
 
-const { argv } = yargs()
+const { argv } = yargs(process.argv.slice(2))
 	.version('0.1.0')
 	.default('config', 'pixdif.config.js')
-	.commandDir('cmd')
+	.command(await import('./cmd/cmp.js'))
+	.command(await import('./cmd/convert.js'))
+	.command(await import('./cmd/diff.js'))
+	.command(await import('./cmd/serve.js'))
 	.recommendCommands()
 	.demandCommand()
 	.help();

@@ -1,6 +1,6 @@
 import path from 'path';
 
-import { Argv } from 'yargs';
+import type { ArgumentsCamelCase, Argv, Options } from 'yargs';
 import { glob } from 'glob';
 import { BatchComparator, BatchTask } from '@pixdif/core';
 
@@ -9,7 +9,17 @@ import BatchComparatorLogger from '../log/BatchComparatorLogger.js';
 export const command = 'diff <expectedDir> <actualDir> <pattern>';
 export const describe = 'Compare files in two directories.';
 
-export function builder(yargs: Argv): Argv {
+interface DiffOptions extends Options {
+	expectedDir: string;
+	actualDir: string;
+	pattern: string;
+	cacheDir?: string;
+	tolerance?: number;
+	reportDir?: string;
+	reportFormat: string;
+}
+
+export function builder(yargs: Argv): Argv<DiffOptions> {
 	return yargs.options({
 		cacheDir: {
 			type: 'string',
@@ -30,20 +40,10 @@ export function builder(yargs: Argv): Argv {
 			describe: 'Report format. It is an HTML report by default.',
 			default: '@pixdif/html-reporter',
 		},
-	});
+	}) as Argv<DiffOptions>;
 }
 
-interface Arguments {
-	expectedDir: string;
-	actualDir: string;
-	pattern: string;
-	cacheDir?: string;
-	tolerance?: number;
-	reportDir?: string;
-	reportFormat: string;
-}
-
-export async function handler(args: Arguments): Promise<void> {
+export async function handler(args: ArgumentsCamelCase<DiffOptions>): Promise<void> {
 	const {
 		cacheDir,
 		tolerance,

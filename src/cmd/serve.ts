@@ -1,9 +1,9 @@
-import { Argv } from 'yargs';
+import type { ArgumentsCamelCase, Argv, Options } from 'yargs';
 import type { Server } from 'http';
 
 import { ServerOptions, serve } from '../api/index.js';
 
-interface Arguments extends ServerOptions {
+interface ServeOptions extends ServerOptions, Options {
 	/**
 	 * Port number of the server.
 	 */
@@ -13,7 +13,7 @@ interface Arguments extends ServerOptions {
 export const command = 'serve';
 export const describe = 'Start a server to show reports and manage baselines.';
 
-export function builder(argv: Argv): Argv {
+export function builder(argv: Argv): Argv<ServeOptions> {
 	return argv.options({
 		dataDir: {
 			type: 'string',
@@ -33,9 +33,12 @@ export function builder(argv: Argv): Argv {
 	});
 }
 
-export function handler(options: Arguments): Server {
+export const server: {
+	instance?: Server;
+} = {};
+
+export function handler(options: ArgumentsCamelCase<ServeOptions>): void {
 	const app = serve(options);
-	const server = app.listen(options.port);
+	server.instance = app.listen(options.port);
 	console.log(`Listening at ${options.port}`);
-	return server;
 }

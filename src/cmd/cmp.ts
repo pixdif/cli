@@ -1,4 +1,4 @@
-import { Argv } from 'yargs';
+import type { ArgumentsCamelCase, Argv, Options } from 'yargs';
 
 import { Comparator } from '@pixdif/core';
 import ComparatorLogger from '../log/ComparatorLogger.js';
@@ -6,7 +6,15 @@ import ComparatorLogger from '../log/ComparatorLogger.js';
 export const command = 'cmp <expected> <actual>';
 export const describe = 'Compare 2 files.';
 
-export function builder(yargs: Argv): Argv {
+interface CompareOptions extends Options {
+	cacheDir: string;
+	tolerance: number;
+	outputDir?: string;
+	expected: string;
+	actual: string;
+}
+
+export function builder(yargs: Argv): Argv<CompareOptions> {
 	return yargs.options({
 		cacheDir: {
 			type: 'string',
@@ -22,18 +30,10 @@ export function builder(yargs: Argv): Argv {
 			type: 'string',
 			describe: 'The directory to save converted image files.',
 		},
-	});
+	}) as Argv<CompareOptions>;
 }
 
-interface Arguments {
-	cacheDir: string;
-	tolerance: number;
-	outputDir?: string;
-	expected: string;
-	actual: string;
-}
-
-export async function handler(args: Arguments): Promise<void> {
+export async function handler(args: ArgumentsCamelCase<CompareOptions>): Promise<void> {
 	const {
 		cacheDir,
 		tolerance,

@@ -13,6 +13,8 @@ it('compares two images', async () => {
 		cacheDir: 'cache',
 		outputDir: 'output/compare',
 		tolerance: 0,
+		_: [],
+		$0: '',
 	});
 	expect(log).nthCalledWith(1, `Expected: ${expected}`);
 	expect(log).nthCalledWith(2, `Actual: ${actual}`);
