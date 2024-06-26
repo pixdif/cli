@@ -8,8 +8,8 @@
     "pixdif": "pixdif.js"
   },
   "scripts": {
-    "build": "tsc",
-    "debug": "tsc --incremental --sourceMap",
+    "build": "tsc -p src",
+    "debug": "tsc -p src --incremental --sourceMap",
     "test": "npm run lint && npm run jest",
     "lint": "eslint --ext=ts,js .",
     "jest": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --coverage"
