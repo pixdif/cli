@@ -6,7 +6,7 @@
 			"script": "debug",
 			"problemMatcher": [],
 			"label": "npm: debug",
-			"detail": "tsc --incremental --sourceMap",
+			"detail": "tsc -p src --incremental --sourceMap",
 			"group": {
 				"kind": "build",
 				"isDefault": true

@@ -23,6 +23,7 @@ jobs:
         run: |
           cp package.json dist/
           cp LICENSE dist/
+          cp README.md dist/
           cd dist
           npm pkg set main=pixdif.js
           npm pkg delete scripts
