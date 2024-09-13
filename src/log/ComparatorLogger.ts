@@ -1,15 +1,19 @@
+import chalk from 'chalk';
 import { Progress } from '@pixdif/model';
 import { Comparator, Action } from '@pixdif/core/Comparator.js';
 import capitalize from '@pixdif/core/util/capitalize.js';
+import ProgressBar from './ProgressBar.js';
+
+const progressBar = new ProgressBar();
+progressBar.setLabelWidth(10);
 
 function reportProgress(action: string, progress: Progress): void {
-	if (progress.current === 0) {
-		console.log(`${capitalize(action)} ${progress.limit} images...`);
-	} else if (progress.error) {
-		console.error(`Failed to ${action} Page ${progress.current} due to ${progress.error.message}`);
-	} else {
-		process.stdout.write(`${progress.current} / ${progress.limit}...\r`);
+	if (progress.error) {
+		console.error(chalk.red(`Failed to ${action} Page ${progress.current} due to ${progress.error.message}`));
+		return;
 	}
+	progressBar.setLabel(`${capitalize(action)}`);
+	progressBar.show(progress);
 }
 
 function reportPreparingProgress(progress: Progress): void {
@@ -26,6 +30,9 @@ function reportConvertingProgress(progress: Progress): void {
 
 function reportComparingProgress(progress: Progress): void {
 	reportProgress(Action.Comparing, progress);
+	if (progress.current >= progress.limit) {
+		process.stdout.write('\n');
+	}
 }
 
 export class ComparatorLogger {

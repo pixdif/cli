@@ -1,3 +1,4 @@
+import chalk from 'chalk';
 import { TestStatus } from '@pixdif/model';
 import { BatchComparator } from '@pixdif/core';
 
@@ -13,29 +14,29 @@ export class BatchComparatorLogger {
 	track(): void {
 		this.bat.on('started', () => {
 			console.time('Total Time');
-			console.log(`Comparing ${this.bat.getProgressLimit()} files...`);
+			console.log(chalk.dim(`Comparing ${this.bat.getProgressLimit()} files...`));
 		});
 
 		this.bat.on('progress', ({ current, limit, testCase }) => {
 			switch (testCase.status) {
 			case TestStatus.Matched:
-				console.log('Matched: Yes');
+				console.log(`Matched: ${chalk.green('Yes')}`);
 				break;
 			case TestStatus.Mismatched:
-				console.log('Matched: No');
+				console.log(`Matched: ${chalk.red('No')}`);
 				break;
 			case TestStatus.ExpectedNotFound:
-				console.log(`No baseline at ${testCase.expected}`);
+				console.log(chalk.dim(`No baseline at ${testCase.expected}`));
 				break;
 			case TestStatus.ActualNotFound:
-				console.log(`No output at ${testCase.actual}`);
+				console.log(chalk.dim(`No output at ${testCase.actual}`));
 				break;
 			case TestStatus.Unexecuted:
 			default:
 				console.log('');
-				console.log(`(${current} / ${limit}) ${testCase.path ?? testCase.name}`);
-				console.log(`Expected: ${testCase.expected}`);
-				console.log(`Actual: ${testCase.actual}`);
+				console.log(`${chalk.bgBlue(` ${current} / ${limit} `)} ${testCase.path ?? testCase.name}`);
+				console.log(`${chalk.bold('Expected'.padEnd(10))}: ${testCase.expected}`);
+				console.log(`${chalk.bold('Actual'.padEnd(10))}: ${testCase.actual}`);
 				break;
 			}
 		});
@@ -48,7 +49,7 @@ export class BatchComparatorLogger {
 		this.bat.on('stopped', () => {
 			console.log('');
 			console.timeEnd('Total Time');
-			console.log(`Report: ${this.bat.getReportDir()}`);
+			console.log(`${chalk.bold('Report')}: ${this.bat.getReportDir()}`);
 		});
 	}
 }

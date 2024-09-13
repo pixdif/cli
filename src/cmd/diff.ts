@@ -1,5 +1,5 @@
 import path from 'path';
-
+import chalk from 'chalk';
 import type { ArgumentsCamelCase, Argv, Options } from 'yargs';
 import { glob } from 'glob';
 import { BatchComparator, BatchTask } from '@pixdif/core';
@@ -54,8 +54,8 @@ export async function handler(args: ArgumentsCamelCase<DiffOptions>): Promise<vo
 		reportFormat,
 	} = args;
 
-	console.log(`Expected: ${expectedDir}`);
-	console.log(`Actual: ${actualDir}`);
+	console.log(`${chalk.bold('Expected')}: ${expectedDir}`);
+	console.log(`${chalk.bold('Actual')}: ${actualDir}`);
 
 	const cmp = new BatchComparator(reportDir, { tolerance });
 	if (cacheDir) {
@@ -64,7 +64,7 @@ export async function handler(args: ArgumentsCamelCase<DiffOptions>): Promise<vo
 
 	const foundFiles = new Set<string>();
 	const expectedFiles = await glob(pattern, { cwd: expectedDir });
-	console.log(`Found ${expectedFiles.length} baselines.`);
+	console.log(chalk.dim(`Found ${expectedFiles.length} baselines.`));
 	for (const expectedFile of expectedFiles) {
 		foundFiles.add(expectedFile);
 	}
@@ -72,7 +72,7 @@ export async function handler(args: ArgumentsCamelCase<DiffOptions>): Promise<vo
 	for (const actualFile of actualFiles) {
 		foundFiles.add(actualFile);
 	}
-	console.log(`Found ${actualFiles.length} actual outputs.`);
+	console.log(chalk.dim(`Found ${actualFiles.length} actual outputs.`));
 	console.log('');
 
 	for (const filePath of foundFiles) {

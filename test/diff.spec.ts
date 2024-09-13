@@ -1,4 +1,5 @@
 import { jest, it, expect } from '@jest/globals';
+import chalk from 'chalk';
 import path from 'path';
 
 import { handler as diff } from '../src/cmd/diff.js';
@@ -23,29 +24,29 @@ it('compares two directories', async () => {
 		$0: '',
 	});
 	const logLines = [
-		`Expected: ${expectedDir}`,
-		`Actual: ${actualDir}`,
-		'Found 2 baselines.',
-		'Found 2 actual outputs.',
+		`${chalk.bold('Expected')}: ${expectedDir}`,
+		`${chalk.bold('Actual')}: ${actualDir}`,
+		chalk.dim('Found 2 baselines.'),
+		chalk.dim('Found 2 actual outputs.'),
 		'',
-		'Comparing 3 files...',
+		chalk.dim('Comparing 3 files...'),
 		'',
-		`(1 / 3) ${b}`,
-		`Expected: ${path.join(expectedDir, b)}`,
-		`Actual: ${path.join(actualDir, b)}`,
-		'Matched: Yes',
+		`${chalk.bgBlue(' 1 / 3 ')} ${b}`,
+		`${chalk.bold('Expected  ')}: ${path.join(expectedDir, b)}`,
+		`${chalk.bold('Actual    ')}: ${path.join(actualDir, b)}`,
+		`Matched: ${chalk.green('Yes')}`,
 		'',
-		'(2 / 3) shapes-a.png',
-		`Expected: ${path.join(expectedDir, a)}`,
-		`Actual: ${path.join(actualDir, a)}`,
-		`No output at ${path.join(actualDir, a)}`,
+		`${chalk.bgBlue(' 2 / 3 ')} ${a}`,
+		`${chalk.bold('Expected  ')}: ${path.join(expectedDir, a)}`,
+		`${chalk.bold('Actual    ')}: ${path.join(actualDir, a)}`,
+		chalk.dim(`No output at ${path.join(actualDir, a)}`),
 		'',
-		'(3 / 3) shapes-c.png',
-		`Expected: ${path.join(expectedDir, c)}`,
-		`Actual: ${path.join(actualDir, c)}`,
-		`No baseline at ${path.join(expectedDir, c)}`,
+		`${chalk.bgBlue(' 3 / 3 ')} ${c}`,
+		`${chalk.bold('Expected  ')}: ${path.join(expectedDir, c)}`,
+		`${chalk.bold('Actual    ')}: ${path.join(actualDir, c)}`,
+		chalk.dim(`No baseline at ${path.join(expectedDir, c)}`),
 		'',
-		'Report: output/diff',
+		`${chalk.bold('Report')}: output/diff`,
 	];
 	expect(log).toBeCalledTimes(logLines.length);
 	for (let i = 0; i < logLines.length; i++) {
