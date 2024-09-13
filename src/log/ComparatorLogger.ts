@@ -6,7 +6,7 @@ function reportProgress(action: string, progress: Progress): void {
 	if (progress.current === 0) {
 		console.log(`${capitalize(action)} ${progress.limit} images...`);
 	} else if (progress.error) {
-		console.error(`Failed to ${action} Page ${progress.current} due to ${progress.error}`);
+		console.error(`Failed to ${action} Page ${progress.current} due to ${progress.error.message}`);
 	} else {
 		process.stdout.write(`${progress.current} / ${progress.limit}...\r`);
 	}

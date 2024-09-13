@@ -1,10 +1,10 @@
 import fs from 'fs';
 import fsp from 'fs/promises';
 import path from 'path';
+import { once } from 'events';
 
 import type { ArgumentsCamelCase, Argv, Options } from 'yargs';
 import parse from '@pixdif/core/util/parse.js';
-import waitFor from '@pixdif/core/util/waitFor.js';
 
 export const command = 'convert <input>';
 export const describe = 'Convert a file into multiple PNG images.';
@@ -41,7 +41,7 @@ export async function handler(args: ArgumentsCamelCase<ConvertOptions>): Promise
 		const binary = await page.render();
 		const output = fs.createWriteStream(path.join(outputDir, `${i + 1}.png`));
 		binary.pipe(output);
-		await waitFor(output, 'close');
+		await once(output, 'close');
 	}
 	console.log('Done.');
 }

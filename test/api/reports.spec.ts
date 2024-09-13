@@ -13,7 +13,7 @@ it('lists all directories', async () => {
 	const res = await self.get('/api/reports');
 	expect(res.statusCode).toBe(200);
 
-	const reports: Report[] = res.body;
+	const reports = res.body as Report[];
 	expect(reports).toHaveLength(2);
 	const reportNames: string[] = reports.map((report) => report.name);
 	expect(reportNames).toContain('api');
